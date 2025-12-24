@@ -36,7 +36,7 @@
                         <td>@product.IsDeleted</td>
                         <td>
                             <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
-                            <a class="btn btn-warning">Update</a>
+                            <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning">Update</a>
 
                         </td>
                     </tr>

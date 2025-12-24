@@ -20,7 +20,7 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Blog blog)
         {
             if (!ModelState.IsValid) return View(blog);
-            blog.PostedDate = DateTime.UtcNow.AddHours(4);
+            blog.CreateDate = DateTime.UtcNow.AddHours(4);
             await _context.Blogs.AddAsync(blog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -30,6 +30,31 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             var blog = await _context.Blogs.FindAsync(id);
             if (blog is null) return NotFound();
             _context.Blogs.Remove(blog);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var blog = await _context.Blogs.FindAsync(id);
+            if (blog is not { }) return NotFound();
+            return View(blog);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Blog blog)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var existBlog = await _context.Blogs.FindAsync(blog.Id);
+            if (existBlog is null) return NotFound();
+            existBlog.UpdateDate = DateTime.UtcNow.AddHours(4); 
+            existBlog.Title = blog.Title;
+            existBlog.Text = blog.Text;
+            existBlog.ImageName = blog.ImageName;
+            existBlog.ImageUrl = blog.ImageUrl;
+            _context.Blogs.Update(existBlog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

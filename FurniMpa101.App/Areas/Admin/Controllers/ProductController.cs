@@ -35,5 +35,30 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product is not { }) return NotFound();
+            return View(product);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var existProduct = await _context.Products.FindAsync(product.Id);
+            if (existProduct is null) return NotFound();
+            existProduct.UpdatedDate= DateTime.UtcNow.AddHours(4);
+            existProduct.Name = product.Name;
+            existProduct.Price = product.Price;
+            existProduct.ImageName = product.ImageName;
+            existProduct.ImageUrl = product.ImageUrl;
+            _context.Products.Update(existProduct);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
