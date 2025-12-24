@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FurniMpa101.App.Contexts;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FurniMpa101.App.Controllers
 {
-    public class BlogController : Controller
+    public class BlogController(AppDbContext _context) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Blogs.AsQueryable().ToListAsync());
         }
     }
 }

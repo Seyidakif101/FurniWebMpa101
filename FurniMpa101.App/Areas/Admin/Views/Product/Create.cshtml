@@ -1,0 +1,35 @@
+﻿@model Product
+<div class="container">
+    <div class="row">
+        <form method="post" asp-action="Create" asp-controller="Product">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input asp-for="Name" class="form-control" id="name" placeholder="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input asp-for="Price" class="form-control" id="price" placeholder="Price">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="imageName">ImageName</label>
+                <input asp-for="ImageName" class="form-control" id="imageName" placeholder="ImageName">
+                <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">ImageUrl</label>
+                <input asp-for="ImageUrl" class="form-control" id="imageUrl" placeholder="ImageUrl">
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="isDeleted">IsDeleted</label>
+                <input asp-for="IsDeleted" class="form-control" id="isDeleted" placeholder="IsDeleted">
+                <span asp-validation-for="IsDeleted" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
