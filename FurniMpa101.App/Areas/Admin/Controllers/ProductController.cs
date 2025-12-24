@@ -60,5 +60,20 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Toggle(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var existIsDeleted = await _context.Products.FindAsync(id);
+            if (existIsDeleted is null) return NotFound();
+            existIsDeleted.IsDeleted=!existIsDeleted.IsDeleted;
+            _context.Products.Update(existIsDeleted);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

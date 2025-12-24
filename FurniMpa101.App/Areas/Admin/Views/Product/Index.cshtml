@@ -14,11 +14,12 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">ImageName</th>
-                    <th scope="col">ImageUrl</th>
+                    @* <th scope="col">ImageUrl</th> *@
                     <th scope="col">CreatedDate</th>
                     <th scope="col">UpdatedDate</th>
                     <th scope="col">IsDeleted</th>
                     <th scope="col">Actions</th>
+                    <th scope="col">Toggle</th>
 
                 </tr>
             </thead>
@@ -30,14 +31,30 @@
                         <td>@product.Name</td>
                         <td>@product.Price</td>
                         <td>@product.ImageName</td>
-                        <td><img src="~/assets/images/website-images/@product.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td>
+                        @* <td><img src="~/assets/images/website-images/@product.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td> *@
                         <td>@product.CreatedDate</td>
                         <td>@product.UpdatedDate</td>
                         <td>@product.IsDeleted</td>
                         <td>
-                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
                             <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning">Update</a>
-
+                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
+                           
+                        </td>
+                        <td>
+                            <form asp-action="Toggle" asp-route-id="@product.Id" method="post">
+                                @if (!product.IsDeleted)
+                                {
+                                    <button class="btn btn-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-success">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </button>
+                                }
+                            </form>
                         </td>
                     </tr>
                 }

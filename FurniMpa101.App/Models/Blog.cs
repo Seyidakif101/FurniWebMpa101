@@ -10,6 +10,7 @@ namespace FurniMpa101.App.Models
         public string Title { get; set; } = null!;
         public string Text { get; set; }
         public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public string ImageName { get; set; }

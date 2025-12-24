@@ -2,7 +2,7 @@
 
 namespace FurniMpa101.App.Models
 {
-    public class Customers
+    public class Customer
     {
         public int Id { get; set; }
         public string UserName { get; set; }
