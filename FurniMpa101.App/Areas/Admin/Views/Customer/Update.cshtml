@@ -1,0 +1,26 @@
+﻿@model Customer
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="form-group">
+                <label for="userName">UserName</label>
+                <input asp-for="UserName" class="form-control" id="userName" placeholder="UserName">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input asp-for="Password" class="form-control" id="password" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input asp-for="Email" class="form-control" id="email" placeholder="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

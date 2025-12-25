@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurniMpa101.App", "FurniMpa101.App\FurniMpa101.App.csproj", "{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {917ADF35-DCC8-4939-8F5E-BD26E496C5A4}
+	EndGlobalSection
+EndGlobal

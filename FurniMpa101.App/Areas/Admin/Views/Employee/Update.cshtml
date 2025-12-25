@@ -1,0 +1,40 @@
+﻿@model Employee
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="form-group">
+                <label for="firstName">FirstName</label>
+                <input asp-for="FirstName" class="form-control" id="firstName" placeholder="FirstName">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="lastName">LastName</label>
+                <input asp-for="LastName" class="form-control" id="lastName" placeholder="LastName">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input asp-for="Position" class="form-control" id="position" placeholder="Position">
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input asp-for="Description" class="form-control" id="description" placeholder="Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="imageName">ImageName</label>
+                <input asp-for="ImageName" class="form-control" id="imageName" placeholder="ImageName">
+                <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">ImageUrl</label>
+                <input asp-for="ImageUrl" class="form-control" id="imageUrl" placeholder="ImageUrl">
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

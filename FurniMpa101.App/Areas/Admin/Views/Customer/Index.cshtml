@@ -1,0 +1,39 @@
+﻿@model List<Customer>
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-2">
+                <a class="btn btn-primary mb-3" asp-action="Create">Create</a>
+
+            </div>
+        </div>
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Pasword</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Active</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Customer customer in Model)
+                {
+                    <tr>
+                        <th scope="row">@customer.Id</th>
+                        <td>@customer.UserName</td>
+                        <td>@customer.Password</td>
+                        <td>@customer.Email</td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@customer.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@customer.Id" class="btn btn-danger">Delete</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

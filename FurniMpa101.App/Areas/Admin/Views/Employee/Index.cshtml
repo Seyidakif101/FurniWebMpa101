@@ -1,0 +1,61 @@
+﻿@model List<Employee>
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-2">
+                <a class="btn btn-primary mb-3" asp-action="Create">Create</a>
+
+            </div>
+        </div>
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Position</th>
+                    @* <th scope="col">ImageUrl</th> *@
+                    <th scope="col">Description</th>
+                    <th scope="col">ImageName</th>
+                    <th scope="col">Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Employee employee in Model)
+                {
+                    <tr>
+                        <th scope="row">@employee.Id</th>
+                        <td>@employee.FirstName</td>
+                        <td>@employee.LastName</td>
+                        <td>@employee.Position</td>
+                        @* <td><img src="~/assets/images/website-images/@product.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td> *@
+                        <td>@employee.Description</td>
+                        <td>@employee.ImageName</td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@employee.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>
+
+                        </td>
+                        @* <td>
+                            <form asp-action="Toggle" asp-route-id="@employee.Id" method="post">
+                                @if (!employee.IsDeleted)
+                                {
+                                    <button class="btn btn-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-success">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </button>
+                                }
+                            </form>
+                        </td> *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

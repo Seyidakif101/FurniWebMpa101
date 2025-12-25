@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\student\\Desktop\\SeyidTask\\FurniMpa101.App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}|FurniMpa101.App\\FurniMpa101.App.csproj|c:\\users\\student\\desktop\\seyidtask\\furnimpa101.app\\furnimpa101.app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AAD0E60F-8F23-49F0-BF12-CE30151F26E3}|FurniMpa101.App\\FurniMpa101.App.csproj|solutionrelative:furnimpa101.app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\student\\Desktop\\SeyidTask\\FurniMpa101.App\\FurniMpa101.App\\Program.cs",
+              "RelativeDocumentMoniker": "FurniMpa101.App\\Program.cs",
+              "ToolTip": "C:\\Users\\student\\Desktop\\SeyidTask\\FurniMpa101.App\\FurniMpa101.App\\Program.cs",
+              "RelativeToolTip": "FurniMpa101.App\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T04:34:05.928Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
