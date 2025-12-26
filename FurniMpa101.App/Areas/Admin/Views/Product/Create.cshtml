@@ -1,7 +1,8 @@
-﻿@model Product
+﻿@using FurniMpa101.App.ViewModels.ProductViewModels
+@model ProductCreateVM
 <div class="container">
     <div class="row">
-        <form method="post" asp-action="Create" asp-controller="Product">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input asp-for="Name" class="form-control" id="name" placeholder="Name">
@@ -13,14 +14,9 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="imageName">ImageName</label>
-                <input asp-for="ImageName" class="form-control" id="imageName" placeholder="ImageName">
-                <span asp-validation-for="ImageName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="imageUrl">ImageUrl</label>
-                <input asp-for="ImageUrl" class="form-control" id="imageUrl" placeholder="ImageUrl">
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label for="Image">Image</label>
+                <input asp-for="Image" class="form-control" id="Image" placeholder="Image">
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

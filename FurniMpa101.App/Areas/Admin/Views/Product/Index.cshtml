@@ -13,8 +13,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
-                    <th scope="col">ImageName</th>
-                    @* <th scope="col">ImageUrl</th> *@
+                    <th scope="col">Image</th>
                     <th scope="col">CreatedDate</th>
                     <th scope="col">UpdatedDate</th>
                     <th scope="col">IsDeleted</th>
@@ -30,8 +29,7 @@
                         <th scope="row">@product.Id</th>
                         <td>@product.Name</td>
                         <td>@product.Price</td>
-                        <td>@product.ImageName</td>
-                        @* <td><img src="~/assets/images/website-images/@product.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td> *@
+                        <td><img src="~/assets/images/@product.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td>
                         <td>@product.CreatedDate</td>
                         <td>@product.UpdatedDate</td>
                         <td>@product.IsDeleted</td>

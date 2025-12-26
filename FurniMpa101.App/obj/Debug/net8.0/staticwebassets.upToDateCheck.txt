@@ -862,15 +862,21 @@ wwwroot\admin\assets\vendors\typeahead.js\typeahead.bundle.min.js
 wwwroot\assets\css\bootstrap.min.css
 wwwroot\assets\css\style.css
 wwwroot\assets\css\tiny-slider.css
+wwwroot\assets\images\2dcbf7b9-770a-47bd-9cd8-7b0cfa587602Screenshot (6).png
+wwwroot\assets\images\761b833a-a355-4389-ad45-7ea84cffe3e4Screenshot (7).png
+wwwroot\assets\images\7722c5c6-c650-498a-8f64-9a4ccef0b4c5Screenshot (6).png
+wwwroot\assets\images\b09ad10a-1107-489f-a102-d21d5f92cbecScreenshot (8).png
 wwwroot\assets\images\bag.svg
 wwwroot\assets\images\bowl-2.png
 wwwroot\assets\images\bowl-3.png
+wwwroot\assets\images\c1a8647f-b251-464c-bb21-eeec753d03a6Screenshot 2025-11-25 161827.png
 wwwroot\assets\images\cart.svg
 wwwroot\assets\images\couch.png
 wwwroot\assets\images\cross.svg
 wwwroot\assets\images\dots-green.svg
 wwwroot\assets\images\dots-light.svg
 wwwroot\assets\images\dots-yellow.svg
+wwwroot\assets\images\e1138666-3fd7-4e2c-8654-fe358e81979aScreenshot (7).png
 wwwroot\assets\images\envelope-outline.svg
 wwwroot\assets\images\img-grid-1.jpg
 wwwroot\assets\images\img-grid-2.jpg

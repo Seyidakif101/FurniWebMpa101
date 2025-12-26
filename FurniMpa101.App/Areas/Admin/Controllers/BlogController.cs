@@ -1,5 +1,6 @@
 ﻿using FurniMpa101.App.Contexts;
 using FurniMpa101.App.Models;
+using FurniMpa101.App.ViewModels.BlogViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System.Reflection.Metadata;
 namespace FurniMpa101.App.Areas.Admin.Controllers
 {
         [Area("Admin")]
-    public class BlogController(AppDbContext _context) : Controller
+    public class BlogController(AppDbContext _context, IWebHostEnvironment _environment) : Controller
     {
         public async Task<IActionResult> Index()
         {
@@ -20,25 +21,44 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Blog blog)
+        public async Task<IActionResult> Create(BlogCreateVM vm)
         {
-            if (!ModelState.IsValid)
-            {
-                await ViewsBagEmployeeId();
-                return View(blog);
-            }
-
-            var isExistingEmployee = await _context.Employees.AnyAsync(e => e.Id == blog.EmployeeId);
+            if (!ModelState.IsValid) return View(vm);
+            var isExistingEmployee = await _context.Employees.AnyAsync(e => e.Id ==vm.EmployeeId);
 
             if (!isExistingEmployee)
             {
                 ModelState.AddModelError("EmployeeId", "Secdiyiniz employee yoxdu!");
                 await ViewsBagEmployeeId();
-                return View(blog);
+                return View(vm);
             }
-            blog.CreateDate = DateTime.UtcNow.AddHours(4);
+            if (!vm.Image.ContentType.Contains("image"))
+            {
+                ModelState.AddModelError("Image", "File sekil formatinda olmalidir!");
+                return View(vm);
+            }
+            if (vm.Image.Length > 2 * 1024 * 1024)
+            {
+                ModelState.AddModelError("Image", "File olcusu maksimum 2MB ola biler!");
+                return View(vm);
+            }
+            string ImageFileName = Guid.NewGuid().ToString() + vm.Image.FileName;
+            string ImageUrl = Path.Combine(_environment.WebRootPath, "assets", "images", ImageFileName);
+            using FileStream Stream = new(ImageUrl, FileMode.Create);
+            await vm.Image.CopyToAsync(Stream);
+            vm.CreatedDate = DateTime.UtcNow.AddHours(4);
+            Blog blog = new()
+            {
+                Title = vm.Title,
+                Text = vm.Text,
+                EmployeeId = vm.EmployeeId,
+                ImageUrl = ImageFileName,
+
+            };
+
             await _context.Blogs.AddAsync(blog);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id)
@@ -47,6 +67,13 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             if (blog is null) return NotFound();
             _context.Blogs.Remove(blog);
             await _context.SaveChangesAsync();
+            string folderUrl = Path.Combine(_environment.WebRootPath, "assets", "images");
+            string ImageUrl = Path.Combine(folderUrl, blog.ImageUrl);
+
+            if (System.IO.File.Exists(ImageUrl))
+            {
+                System.IO.File.Delete(ImageUrl);
+            }
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
@@ -74,10 +101,9 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
                 await ViewsBagEmployeeId();
                 return View(blog);
             }
-            existBlog.UpdateDate = DateTime.UtcNow.AddHours(4); 
+            existBlog.UpdatedDate = DateTime.UtcNow.AddHours(4); 
             existBlog.Title = blog.Title;
             existBlog.Text = blog.Text;
-            existBlog.ImageName = blog.ImageName;
             existBlog.ImageUrl = blog.ImageUrl;
             existBlog.EmployeeId = blog.EmployeeId;
             _context.Blogs.Update(existBlog);
