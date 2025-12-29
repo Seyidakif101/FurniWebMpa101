@@ -10,8 +10,9 @@ namespace FurniMpa101.App.ViewModels.BlogViewModels
         public string Title { get; set; } = null!;
         public string Text { get; set; }
         [Required]
-        public int EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
         public string? ImageUrl { get; set; }
+        public List<string> TagNames { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }

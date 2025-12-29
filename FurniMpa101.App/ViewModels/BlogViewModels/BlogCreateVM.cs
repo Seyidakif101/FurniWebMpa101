@@ -12,5 +12,7 @@ namespace FurniMpa101.App.ViewModels.BlogViewModels
         [Required]
         public int EmployeeId { get; set; }
         public IFormFile Image { get; set; }
+
+        public List<int> TagIds { get; set; }
     }
 }

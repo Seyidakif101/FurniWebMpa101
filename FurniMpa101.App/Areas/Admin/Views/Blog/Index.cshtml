@@ -1,5 +1,4 @@
-﻿@model List<Blog>
-
+﻿@model List<BlogGetVM>
 <div class="container">
     <div class="row">
         <div class="col-2">
@@ -14,7 +13,6 @@
                     <th scope="col">Text</th>
                     <th scope="col">Employee Name</th>
                     <th scope="col">Image</th>
-                    <th scope="col">IsDeleted</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -25,9 +23,8 @@
                         <td>@blog.Id</td>
                         <td>@blog.Title</td>
                         <td>@blog.Text</td>
-                        <td>@blog.Employee?.FirstName</td>
+                        <td>@blog.EmployeeName</td>
                         <td><img src="~/assets/images/@blog.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td>
-                        <td>@blog.IsDeleted</td>
                         <td>
                             <a asp-action="Update" asp-route-id="@blog.Id" class="btn btn-warning">Update</a>
                             <a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger">Delete</a>

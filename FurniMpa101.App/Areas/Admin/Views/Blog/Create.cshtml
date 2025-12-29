@@ -29,7 +29,16 @@
                 <input asp-for="Image" class="form-control" id="Image" placeholder="Image">
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label for="tag">Tag</label>
+                <select asp-for="TagIds" class="form-control" id="TagsIds">
+                    @foreach (var tag in ViewBag.Tags)
+                    {
+                        <option value="@tag.Id">@tag.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="TagIds" class="text-danger"></span>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a asp-action="Index" class="btn btn-secondary">Cancel</a>
         </form>

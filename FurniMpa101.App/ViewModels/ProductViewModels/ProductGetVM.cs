@@ -8,6 +8,7 @@
         public string ImageUrl { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public List<string> TagNames { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

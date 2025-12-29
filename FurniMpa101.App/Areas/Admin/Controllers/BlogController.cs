@@ -1,6 +1,8 @@
 ﻿using FurniMpa101.App.Contexts;
+using FurniMpa101.App.Helpers;
 using FurniMpa101.App.Models;
 using FurniMpa101.App.ViewModels.BlogViewModels;
+using FurniMpa101.App.ViewModels.ProductViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +15,16 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Blogs.AsQueryable().Include(b => b.Employee).ToListAsync());
+            var blogs = await _context.Blogs.Include(x => x.Employee).Select(blog => new BlogGetVM()
+            {
+                Id = blog.Id,
+                Title = blog.Title,
+                Text = blog.Text,
+                EmployeeName = blog.Employee.FirstName,
+                ImageUrl = blog.ImageUrl
+
+            }).ToListAsync();
+            return View(blogs);
         }
         public async Task<IActionResult> Create()
         {
@@ -25,19 +36,28 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(vm);
             var isExistingEmployee = await _context.Employees.AnyAsync(e => e.Id ==vm.EmployeeId);
+            foreach (var tagId in vm.TagIds)
+            {
+                var isExistTag = await _context.Tags.AnyAsync(x => x.Id == tagId);
+                if (!isExistTag)
+                {
 
+                    ModelState.AddModelError("TagIds", "Bele bir tag yoxdur");
+                    return View(vm);
+                }
+            }
             if (!isExistingEmployee)
             {
                 ModelState.AddModelError("EmployeeId", "Secdiyiniz employee yoxdu!");
                 await ViewsBagEmployeeId();
                 return View(vm);
             }
-            if (!vm.Image.ContentType.Contains("image"))
+            if (!vm.Image.CheckType())
             {
                 ModelState.AddModelError("Image", "File sekil formatinda olmalidir!");
                 return View(vm);
             }
-            if (vm.Image.Length > 2 * 1024 * 1024)
+            if (vm.Image.CheckSize(2))
             {
                 ModelState.AddModelError("Image", "File olcusu maksimum 2MB ola biler!");
                 return View(vm);
@@ -52,8 +72,19 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
                 Text = vm.Text,
                 EmployeeId = vm.EmployeeId,
                 ImageUrl = ImageFileName,
-                CreatedDate = DateTime.UtcNow.AddHours(4)
+                CreatedDate = DateTime.UtcNow.AddHours(4),
+                BlogTags = []
             };
+            foreach (var tagId in vm.TagIds)
+            {
+                BlogTag blogTag = new()
+                {
+                    TagId = tagId,
+                    Blog = blog
+                };
+                blog.BlogTags.Add(blogTag);
+
+            }
 
             await _context.Blogs.AddAsync(blog);
             await _context.SaveChangesAsync();
@@ -78,33 +109,80 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var blog = await _context.Blogs.FindAsync(id);
-            if (blog is not { }) return NotFound();
-            await ViewsBagEmployeeId();
-            return View(blog);
+            var blog = await _context.Blogs.Include(x => x.BlogTags).SingleOrDefaultAsync(x => x.Id == id);
+            if (blog is null) return NotFound();
+            BlogUpdateVM vm = new BlogUpdateVM()
+            {
+                Id = blog.Id,
+                Title = blog.Title,
+                Text = blog.Text,
+                EmployeeId = blog.EmployeeId,
+                ImageUrl = blog.ImageUrl,
+                TagIds = blog.BlogTags.Select(x => x.TagId).ToList()
+            };
+            return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Blog blog)
+        public async Task<IActionResult> Update(BlogUpdateVM vm)
         {
             if (!ModelState.IsValid)
             {
                 await ViewsBagEmployeeId();
-                return View();
+                return View(vm);
             }
-            var existBlog = await _context.Blogs.FindAsync(blog.Id);
+            var existBlog = await _context.Blogs.Include(x => x.BlogTags).FirstOrDefaultAsync(x => x.Id == vm.Id);;
             if (existBlog is null) return NotFound();
-            var isExistingBlog = await _context.Blogs.AnyAsync(c => c.Id == blog.EmployeeId);
+            var isExistingBlog = await _context.Blogs.AnyAsync(c => c.Id == vm.EmployeeId);
             if (!isExistingBlog)
             {
                 ModelState.AddModelError("EmployeeId", "Secdiyiniz employee yoxdu!");
                 await ViewsBagEmployeeId();
-                return View(blog);
+                return View(vm);
+            }
+            foreach (var tagId in vm.TagIds)
+            {
+                var isExistTag = await _context.Tags.AnyAsync(x => x.Id == tagId);
+                if (!isExistTag)
+                {
+
+                    ModelState.AddModelError("TagIds", "Bele bir tag yoxdur");
+                    return View(vm);
+                }
+            }
+            if (!vm.Image.CheckType())
+            {
+                ModelState.AddModelError("Image", "File sekil formatinda olmalidir!");
+                return View(vm);
+            }
+            if (vm.Image.CheckSize(2))
+            {
+                ModelState.AddModelError("Image", "File olcusu maksimum 2MB ola biler!");
+                return View(vm);
             }
             existBlog.UpdatedDate = DateTime.UtcNow.AddHours(4); 
-            existBlog.Title = blog.Title;
-            existBlog.Text = blog.Text;
-            existBlog.ImageUrl = blog.ImageUrl;
-            existBlog.EmployeeId = blog.EmployeeId;
+            existBlog.Title = vm.Title;
+            existBlog.Text = vm.Text;
+            existBlog.ImageUrl = vm.ImageUrl;
+            existBlog.EmployeeId = vm.EmployeeId;
+            existBlog.BlogTags = [];
+            foreach (var tagId in vm.TagIds)
+            {
+                BlogTag blogTag = new()
+                {
+                    TagId = tagId,
+                    BlogId = existBlog.Id
+                };
+                existBlog.BlogTags.Add(blogTag);
+            }
+            string folderPath = Path.Combine(_environment.WebRootPath, "assets", "images", "website-images");
+            if (vm.Image is { })
+            {
+                string newImage = await vm.Image.SaveFileAsync(folderPath);
+                string existImage = Path.Combine(folderPath, existBlog.ImageUrl);
+
+                ExtensionMethods.DeleteFile(existImage);
+                existBlog.ImageUrl = newImage;
+            }
             _context.Blogs.Update(existBlog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -113,6 +191,8 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
         {
             var emplyees = await _context.Employees.ToListAsync();
             ViewBag.Employees = emplyees;
+            var tags = await _context.Tags.ToListAsync();
+            ViewBag.Tags = tags;
         }
     }
 }

@@ -14,5 +14,6 @@ namespace FurniMpa101.App.Models
         public Employee? Employee { get; set; }
         [Required]
         public string ImageUrl { get; set; }
+        public ICollection<BlogTag> BlogTags { get; set; } = [];
     }
 }
