@@ -1,4 +1,5 @@
 ﻿using FurniMpa101.App.Contexts;
+using FurniMpa101.App.Helpers;
 using FurniMpa101.App.Models;
 using FurniMpa101.App.ViewModels.ProductViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,21 @@ using System.Threading.Tasks;
 namespace FurniMpa101.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AutoValidateAntiforgeryToken]
     public class ProductController(AppDbContext _context, IWebHostEnvironment _environment) : Controller
     {
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.AsQueryable().ToListAsync());
+            var products = await _context.Products.Select(product => new ProductGetVM()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                ImageUrl = product.ImageUrl,
+                IsDeleted= product.IsDeleted
+
+            }).ToListAsync();
+            return View(products);
         }
         public IActionResult Create()
         {
@@ -23,28 +34,27 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ProductCreateVM vm)
         {
             if (!ModelState.IsValid) return View(vm);
-            if (!vm.Image.ContentType.Contains("image"))
+            if (!vm.Image.CheckType())
             {
                 ModelState.AddModelError("Image", "File sekil formatinda olmalidir!");
                 return View(vm);
             }
-            if (vm.Image.Length > 2 * 1024 * 1024)
+            if (vm.Image.CheckSize(2))
             {
                 ModelState.AddModelError("Image", "File olcusu maksimum 2MB ola biler!");
                 return View(vm);
             }
+
             string ImageFileName = Guid.NewGuid().ToString() + vm.Image.FileName;
             string ImageUrl = Path.Combine(_environment.WebRootPath, "assets", "images", ImageFileName);
             using FileStream Stream = new(ImageUrl, FileMode.Create);
             await vm.Image.CopyToAsync(Stream);
-            vm.CreatedDate = DateTime.UtcNow.AddHours(4);
             Product product = new()
             {
                 Name = vm.Name,
                 Price = vm.Price,
                 ImageUrl = ImageFileName,
-                CreatedDate = DateTime.UtcNow,
-
+                CreatedDate = DateTime.UtcNow.AddHours(4),
             };
 
             await _context.Products.AddAsync(product);
@@ -57,6 +67,7 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product is null) return NotFound();
             _context.Products.Remove(product);
+
             await _context.SaveChangesAsync();
             string folderUrl = Path.Combine(_environment.WebRootPath, "assets", "images");
             string ImageUrl = Path.Combine(folderUrl, product.ImageUrl);
@@ -70,23 +81,48 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product is not { }) return NotFound();
-            return View(product);
+            var product = await _context.Products.SingleOrDefaultAsync(x => x.Id == id);
+            if (product is null) return NotFound();
+            ProductUpdateVM vm = new ProductUpdateVM()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                ImageUrl = product.ImageUrl,
+            };
+            return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Product product)
+        public async Task<IActionResult> Update(ProductUpdateVM vm)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(vm);
             }
-            var existProduct = await _context.Products.FindAsync(product.Id);
+            var existProduct = await _context.Products.FirstOrDefaultAsync(x => x.Id == vm.Id);
             if (existProduct is null) return NotFound();
+            if (!vm.Image?.CheckType() ?? false)
+            {
+                ModelState.AddModelError("Image", "File sekil formatinda olmalidir!");
+                return View(vm);
+            }
+            if (vm.Image?.CheckSize(2) ?? false)
+            {
+                ModelState.AddModelError("Image", "File olcusu maksimum 2MB ola biler!");
+                return View(vm);
+            }
             existProduct.UpdatedDate= DateTime.UtcNow.AddHours(4);
-            existProduct.Name = product.Name;
-            existProduct.Price = product.Price;
-            existProduct.ImageUrl = product.ImageUrl;
+            existProduct.Name = vm.Name;
+            existProduct.Price = vm.Price;
+            string folderPath = Path.Combine(_environment.WebRootPath, "assets", "images");
+            if (vm.Image is { })
+            {
+                string newImage = await vm.Image.SaveFileAsync(folderPath);
+                string existImage = Path.Combine(folderPath, existProduct.ImageUrl);
+
+                ExtensionMethods.DeleteFile(existImage);
+                existProduct.ImageUrl = newImage;
+            }
             _context.Products.Update(existProduct);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

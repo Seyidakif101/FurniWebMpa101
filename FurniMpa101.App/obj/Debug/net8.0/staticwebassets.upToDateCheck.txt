@@ -1,3 +1,41 @@
+wwwroot\assets\css\bootstrap.min.css
+wwwroot\assets\css\style.css
+wwwroot\assets\css\tiny-slider.css
+wwwroot\assets\images\bag.svg
+wwwroot\assets\images\bowl-2.png
+wwwroot\assets\images\bowl-3.png
+wwwroot\assets\images\cart.svg
+wwwroot\assets\images\couch.png
+wwwroot\assets\images\cross.svg
+wwwroot\assets\images\dots-green.svg
+wwwroot\assets\images\dots-light.svg
+wwwroot\assets\images\dots-yellow.svg
+wwwroot\assets\images\envelope-outline.svg
+wwwroot\assets\images\img-grid-1.jpg
+wwwroot\assets\images\img-grid-2.jpg
+wwwroot\assets\images\img-grid-3.jpg
+wwwroot\assets\images\person-1.jpg
+wwwroot\assets\images\person-1.png
+wwwroot\assets\images\person_1.jpg
+wwwroot\assets\images\person_2.jpg
+wwwroot\assets\images\person_3.jpg
+wwwroot\assets\images\person_4.jpg
+wwwroot\assets\images\post-1.jpg
+wwwroot\assets\images\post-2.jpg
+wwwroot\assets\images\post-3.jpg
+wwwroot\assets\images\product-1.png
+wwwroot\assets\images\product-2.png
+wwwroot\assets\images\product-3.png
+wwwroot\assets\images\return.svg
+wwwroot\assets\images\sofa.png
+wwwroot\assets\images\support.svg
+wwwroot\assets\images\truck.svg
+wwwroot\assets\images\user.svg
+wwwroot\assets\images\why-choose-us-img.jpg
+wwwroot\assets\js\bootstrap.bundle.min.js
+wwwroot\assets\js\custom.js
+wwwroot\assets\js\tiny-slider.js
+wwwroot\assets\scss\style.scss
 wwwroot\admin\assets\css\maps\style.css.map
 wwwroot\admin\assets\css\style.css
 wwwroot\admin\assets\fonts\Roboto\Roboto-Black.eot
@@ -859,47 +897,15 @@ wwwroot\admin\assets\vendors\ti-icons\fonts\themify.svg
 wwwroot\admin\assets\vendors\ti-icons\fonts\themify.ttf
 wwwroot\admin\assets\vendors\ti-icons\fonts\themify.woff
 wwwroot\admin\assets\vendors\typeahead.js\typeahead.bundle.min.js
-wwwroot\assets\css\bootstrap.min.css
-wwwroot\assets\css\style.css
-wwwroot\assets\css\tiny-slider.css
 wwwroot\assets\images\2dcbf7b9-770a-47bd-9cd8-7b0cfa587602Screenshot (6).png
-wwwroot\assets\images\761b833a-a355-4389-ad45-7ea84cffe3e4Screenshot (7).png
 wwwroot\assets\images\7722c5c6-c650-498a-8f64-9a4ccef0b4c5Screenshot (6).png
 wwwroot\assets\images\b09ad10a-1107-489f-a102-d21d5f92cbecScreenshot (8).png
-wwwroot\assets\images\bag.svg
-wwwroot\assets\images\bowl-2.png
-wwwroot\assets\images\bowl-3.png
-wwwroot\assets\images\c1a8647f-b251-464c-bb21-eeec753d03a6Screenshot 2025-11-25 161827.png
-wwwroot\assets\images\cart.svg
-wwwroot\assets\images\couch.png
-wwwroot\assets\images\cross.svg
-wwwroot\assets\images\dots-green.svg
-wwwroot\assets\images\dots-light.svg
-wwwroot\assets\images\dots-yellow.svg
-wwwroot\assets\images\e1138666-3fd7-4e2c-8654-fe358e81979aScreenshot (7).png
-wwwroot\assets\images\envelope-outline.svg
-wwwroot\assets\images\img-grid-1.jpg
-wwwroot\assets\images\img-grid-2.jpg
-wwwroot\assets\images\img-grid-3.jpg
-wwwroot\assets\images\person-1.jpg
-wwwroot\assets\images\person-1.png
-wwwroot\assets\images\person_1.jpg
-wwwroot\assets\images\person_2.jpg
-wwwroot\assets\images\person_3.jpg
-wwwroot\assets\images\person_4.jpg
-wwwroot\assets\images\post-1.jpg
-wwwroot\assets\images\post-2.jpg
-wwwroot\assets\images\post-3.jpg
-wwwroot\assets\images\product-1.png
-wwwroot\assets\images\product-2.png
-wwwroot\assets\images\product-3.png
-wwwroot\assets\images\return.svg
-wwwroot\assets\images\sofa.png
-wwwroot\assets\images\support.svg
-wwwroot\assets\images\truck.svg
-wwwroot\assets\images\user.svg
-wwwroot\assets\images\why-choose-us-img.jpg
-wwwroot\assets\js\bootstrap.bundle.min.js
-wwwroot\assets\js\custom.js
-wwwroot\assets\js\tiny-slider.js
-wwwroot\assets\scss\style.scss
+wwwroot\assets\images\ecdd6763-6d6a-4a84-9624-b88f2f45a647Screenshot (7).png
+wwwroot\assets\images\761b833a-a355-4389-ad45-7ea84cffe3e4Screenshot (7).png
+wwwroot\assets\images\98d1092b-a376-4933-8e9e-0d7f11a3edd2Screenshot (7).png
+wwwroot\assets\images\569a518f-ea75-44bc-8994-eaa519f548b0Screenshot (7).png
+wwwroot\assets\images\93bcae82-8243-455a-987c-0f69ae52cc9bScreenshot 2025-11-25 161827.png
+wwwroot\assets\images\a00984d5-55ae-4e92-a004-7493b233b0d8Screenshot (7).png
+wwwroot\assets\images\c689121f-db98-491e-873e-40b0e3770e1bScreenshot (6).png
+wwwroot\assets\images\6c57eb05-f712-4d1e-8410-24c06a64f6bdScreenshot (7).png
+wwwroot\assets\images\f870c4ab-8f39-4257-8689-5e5ff58b1fa9Screenshot (8).png

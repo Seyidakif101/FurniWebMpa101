@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<ProductGetVM>
 <div class="container">
     <div class="row">
         <div class="row">
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Product product in Model)
+                @foreach (ProductGetVM product in Model)
                 {
                     <tr>
                         <th scope="row">@product.Id</th>

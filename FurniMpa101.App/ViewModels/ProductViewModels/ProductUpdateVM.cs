@@ -2,7 +2,7 @@
 
 namespace FurniMpa101.App.ViewModels.ProductViewModels
 {
-    public class ProductCreateVM
+    public class ProductUpdateVM
     {
         public int Id { get; set; }
 
@@ -11,7 +11,7 @@ namespace FurniMpa101.App.ViewModels.ProductViewModels
         public string Name { get; set; } = null!;
 
         public double Price { get; set; }
-        public IFormFile Image {  get; set; }
-        public bool IsDeleted { get; set; }
+        public IFormFile? Image { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

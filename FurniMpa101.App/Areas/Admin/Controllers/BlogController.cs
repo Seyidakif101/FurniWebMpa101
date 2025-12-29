@@ -46,14 +46,13 @@ namespace FurniMpa101.App.Areas.Admin.Controllers
             string ImageUrl = Path.Combine(_environment.WebRootPath, "assets", "images", ImageFileName);
             using FileStream Stream = new(ImageUrl, FileMode.Create);
             await vm.Image.CopyToAsync(Stream);
-            vm.CreatedDate = DateTime.UtcNow.AddHours(4);
             Blog blog = new()
             {
                 Title = vm.Title,
                 Text = vm.Text,
                 EmployeeId = vm.EmployeeId,
                 ImageUrl = ImageFileName,
-
+                CreatedDate = DateTime.UtcNow.AddHours(4)
             };
 
             await _context.Blogs.AddAsync(blog);

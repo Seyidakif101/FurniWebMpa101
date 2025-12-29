@@ -13,5 +13,6 @@ namespace FurniMpa101.App.Models
         [Required]
         public string ImageUrl { get; set; }=null!;
 
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Customer
+﻿@model CustomerUpdateVM
 <div class="container">
     <div class="row">
         <form method="post">
@@ -17,7 +17,13 @@
                 <input asp-for="Email" class="form-control" id="email" placeholder="Email">
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <input type="hidden" asp-for="ImageUrl" />
+                <img src="~/assets/images/@Model.ImageUrl" width="30" height="30" />
+                <label for="Image">Image</label>
+                <input asp-for="Image" class="form-control" id="Image" placeholder="Image">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
             <a asp-action="Index" class="btn btn-secondary">Cancel</a>

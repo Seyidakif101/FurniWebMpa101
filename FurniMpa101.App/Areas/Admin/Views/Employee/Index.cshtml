@@ -1,4 +1,4 @@
-﻿@model List<Employee>
+﻿@model List<EmployeeGetVM>
 <div class="container">
     <div class="row">
         <div class="row">
@@ -16,13 +16,12 @@
                     <th scope="col">Position</th>
                     <th scope="col">Image</th>
                     <th scope="col">Description</th>
-                    <th scope="col">IsDeleted</th>
                     <th scope="col">Actions</th>
 
                 </tr>
             </thead>
             <tbody>
-                @foreach (Employee employee in Model)
+                @foreach (EmployeeGetVM employee in Model)
                 {
                     <tr>
                         <th scope="row">@employee.Id</th>
@@ -31,7 +30,6 @@
                         <td>@employee.Position</td>
                         <td><img src="~/assets/images/@employee.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td>
                         <td>@employee.Description</td>
-                        <td>@employee.IsDeleted</td>
                         <td>
                             <a asp-action="Update" asp-route-id="@employee.Id" class="btn btn-warning">Update</a>
                             <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>

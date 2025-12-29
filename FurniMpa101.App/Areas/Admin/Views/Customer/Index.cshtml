@@ -1,4 +1,4 @@
-﻿@model List<Customer>
+﻿@model List<CustomerGetVM>
 <div class="container">
     <div class="row">
         <div class="row">
@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Customer customer in Model)
+                @foreach (CustomerGetVM customer in Model)
                 {
                     <tr>
                         <th scope="row">@customer.Id</th>
@@ -29,7 +29,6 @@
                         <td>@customer.Password</td>
                         <td>@customer.Email</td>
                         <td><img src="~/assets/images/@customer.ImageUrl" width="40" height="40" alt="Alternate Text" /> </td>
-                        <td>@customer.IsDeleted</td>
                         <td>
                             <a asp-action="Update" asp-route-id="@customer.Id" class="btn btn-warning">Update</a>
                             <a asp-action="Delete" asp-route-id="@customer.Id" class="btn btn-danger">Delete</a>
